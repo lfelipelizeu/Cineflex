@@ -1,11 +1,13 @@
 import Header from './Header.js';
 import MoviesList from './MoviesList.js';
+import SessionsList from './SessionsList.js';
 
 export default function App () {
     return (
         <>
             <Header />
-            <MoviesList movies={movies} />
+            {/*<MoviesList movies={movies} />*/}
+            <SessionsList />
         </>
     );
 }

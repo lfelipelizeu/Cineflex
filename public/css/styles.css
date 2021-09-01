@@ -50,3 +50,30 @@ main div.movies-list div.movie img {
     width: 100%;
     height: 100%;
 }
+
+section.sessions-list div.day h2 {
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: 2%;
+    color: #293845;
+}
+
+section.sessions-list div.day div.sessions {
+    display: flex;
+    margin: 15px 0 30px;
+}
+
+section.sessions-list div.day div.sessions div.session {
+    width: 83px;
+    height: 43px;
+    background-color: #e8833a;
+    border-radius: 3px;
+    margin-right: 10px;
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: 2%;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
