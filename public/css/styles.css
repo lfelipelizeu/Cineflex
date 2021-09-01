@@ -20,15 +20,33 @@ header {
     position: fixed;
     top: 0;
     left: 0;
+    z-index: 1;
 }
 
 h1 {
     font-size: 24px;
-    font-weight: 400;
     letter-spacing: 4%;
     text-align: center;
-    color: #293845;
     margin-bottom: 50px;
+}
+
+h2 {
+    font-size: 20px;
+    letter-spacing: 2%;
+}
+
+h3 {
+    font-size: 26px;
+}
+
+h1, h2, h3 {
+    font-weight: 400;
+    color: #293845;
+}
+
+img {
+    width: 100%;
+    height: 100%;
 }
 
 main div.movies-list {
@@ -46,16 +64,8 @@ main div.movies-list div.movie {
     border-radius: 3px;
 }
 
-main div.movies-list div.movie img {
-    width: 100%;
-    height: 100%;
-}
-
-section.sessions-list div.day h2 {
-    font-size: 20px;
-    font-weight: 400;
-    letter-spacing: 2%;
-    color: #293845;
+main div.movies-list div.movie:active {
+    filter: brightness(50%);
 }
 
 section.sessions-list div.day div.sessions {
@@ -75,5 +85,34 @@ section.sessions-list div.day div.sessions div.session {
     color: #ffffff;
     display: flex;
     justify-content: center;
+    align-items: center;
+}
+
+section.sessions-list div.day div.sessions div.session:active {
+    filter: brightness(50%);
+}
+
+footer {
+    width: 100%;
+    height: 120px;
+    background-color: #dfe6ed;
+    padding: 15px 10px;
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+}
+
+footer div.movie {
+    background-color: #ffffff;
+    padding: 5px;
+    box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+    margin-right: 15px;
+}
+
+footer div.movie-info {
+    display: flex;
     align-items: center;
 }

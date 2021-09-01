@@ -1,3 +1,5 @@
+import Movie from './Movie.js';
+
 export default function MoviesList ({ movies }) {
     return (
         <main>
@@ -6,13 +8,5 @@ export default function MoviesList ({ movies }) {
                {movies.map((movie,index) => <Movie key={index} title={movie.title} img={movie.img} />)}
             </div>
         </main>
-    );
-}
-
-function Movie ({ title, img }) {
-    return (
-        <div className="movie">
-            <img src={img} alt={title} />
-        </div>
     );
 }

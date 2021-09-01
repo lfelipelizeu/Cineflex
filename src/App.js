@@ -7,7 +7,7 @@ export default function App () {
         <>
             <Header />
             {/*<MoviesList movies={movies} />*/}
-            <SessionsList />
+            <SessionsList movie={movies[0]} />
         </>
     );
 }

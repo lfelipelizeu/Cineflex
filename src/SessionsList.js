@@ -1,8 +1,14 @@
+import Footer from './Footer.js';
+import React, { useState } from 'react';
+
 export default function SessionsList ({ movie }) {
+    const [ movieInfo, setMovieInfo ] = useState([movie.title]);
+
     return (
         <section className="sessions-list">
             <h1>Selecione o horário</h1>
             {days.map((day, index) => <Day key={index} day={day} />)}
+            <Footer movie={movie} movieInfo={movieInfo} />
         </section>
     );
 }
