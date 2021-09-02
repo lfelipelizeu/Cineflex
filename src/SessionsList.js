@@ -1,5 +1,6 @@
 import Footer from './Footer.js';
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function SessionsList ({ movie }) {
     const [ movieInfo, setMovieInfo ] = useState([movie.title]);
@@ -20,7 +21,13 @@ function Day ({ day }) {
         <div className="day">
             <h2>{weekday} - {date}</h2>
             <div className="sessions">
-               {sessions.map((session,index) => <div key={index} className="session">{session}</div>)}
+                {sessions.map((session,index) => {
+                   return (
+                        <Link to="/sessions/seats">
+                            <button key={index}>{session}</button>
+                        </Link>
+                    )
+                })}
             </div>
         </div>
     );

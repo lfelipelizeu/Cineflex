@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 export default function SuccessScreen () {
     return (
         <section className="success-screen">
@@ -5,7 +7,9 @@ export default function SuccessScreen () {
             <MovieInfo />
             <SeatsInfo />
             <BuyerInfo />
-            <button>Voltar pra Home</button>
+            <Link to="/">
+                <button>Voltar pra Home</button>
+            </Link>
         </section>
     );
 }

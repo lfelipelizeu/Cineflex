@@ -3,16 +3,27 @@ import MoviesList from './MoviesList.js';
 import SessionsList from './SessionsList.js';
 import SelectSeats from './SelectSeats.js';
 import SuccessScreen from './SuccessScreen.js';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 export default function App () {
     return (
-        <>
+        <BrowserRouter>
             <Header />
-            {/*<MoviesList movies={movies} />*/}
-            {/*<SessionsList movie={movies[0]} />*/}
-            {/*<SelectSeats movie={movies[0]} />*/}
-            <SuccessScreen />
-        </>
+            <Switch>
+                <Route path="/" exact>
+                    <MoviesList movies={movies} />
+                </Route>
+                <Route path="/sessions" exact>
+                    <SessionsList movie={movies[0]} />
+                </Route>
+                <Route path="/sessions/seats" exact>
+                    <SelectSeats movie={movies[0]} />
+                </Route>
+                <Route path="/sessions/seats/success" exact>
+                    <SuccessScreen />
+                </Route>
+            </Switch>
+        </BrowserRouter>
     );
 }
 

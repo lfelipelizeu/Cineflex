@@ -1,5 +1,6 @@
 import Footer from './Footer.js';
 import React, { useState } from "react";
+import { Link } from 'react-router-dom';
 
 export default function SelectSeats ({ movie }) {
     const [ movieInfo, setMovieInfo ] = useState([movie.title, "Quinta-feira - 15:00"]);
@@ -12,7 +13,9 @@ export default function SelectSeats ({ movie }) {
             </div>
             <SeatClasses />
             <BuyerData />
-            <button>Reservar assento(s)</button>
+            <Link to="/sessions/seats/success">
+                <button>Reservar assento(s)</button>
+            </Link>
             <Footer movie={movie} movieInfo={movieInfo} />
         </section>
     );
