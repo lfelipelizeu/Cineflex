@@ -14,6 +14,9 @@ export default function ({ movie, movieInfo }) {
 
 function Info ({ movieInfo }) {
     return (
-        <h3>{movieInfo[0]}</h3>
+        <>
+            <h3>{movieInfo[0]}</h3>
+            <h3>{movieInfo[1]}</h3>
+        </>
     );
 }

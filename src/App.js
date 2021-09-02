@@ -1,13 +1,15 @@
 import Header from './Header.js';
 import MoviesList from './MoviesList.js';
 import SessionsList from './SessionsList.js';
+import SelectSeats from './SelectSeats.js';
 
 export default function App () {
     return (
         <>
             <Header />
             {/*<MoviesList movies={movies} />*/}
-            <SessionsList movie={movies[0]} />
+            {/*<SessionsList movie={movies[0]} />*/}
+            <SelectSeats movie={movies[0]} />
         </>
     );
 }
