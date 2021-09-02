@@ -3,6 +3,7 @@
 body {
     font-family: 'Roboto', sans-serif;
     background-color: #ffffff;
+    color: #293845;
     padding: 120px 20px 150px;
 }
 
@@ -41,7 +42,6 @@ h3 {
 
 h1, h2, h3 {
     font-weight: 400;
-    color: #293845;
 }
 
 img {
@@ -59,7 +59,7 @@ button {
 }
 
 button:active {
-    filter: brightness(50%);
+    filter: brightness(80%);
 }
 
 main div.movies-list {
@@ -201,7 +201,6 @@ section.select-seats div.buyer-data {
     flex-direction: column;
     font-size: 18px;
     font-weight: 400;
-    color: #293845;
     margin-bottom: 10px;
 }
 
@@ -251,4 +250,36 @@ footer div.movie-info {
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
+}
+
+section.success-screen {
+    display: flex;
+    flex-direction: column;
+}
+
+section.success-screen > h1 {
+    font-weight: 700 !important;
+    color: #247a6b !important;
+}
+
+section.success-screen div.info {
+    margin-bottom: 35px;
+}
+
+section.success-screen div.info h1 {
+    text-align: left !important;
+    font-weight: 700 !important;
+    margin-bottom: 10px !important;
+}
+
+section.success-screen div.info p {
+    font-size: 22px;
+    letter-spacing: 0.04em !important;
+    font-weight: 400;
+}
+
+section.success-screen button {
+    width: 230px;
+    height: 45px;
+    margin: 30px auto 0;
 }

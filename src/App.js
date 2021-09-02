@@ -2,6 +2,7 @@ import Header from './Header.js';
 import MoviesList from './MoviesList.js';
 import SessionsList from './SessionsList.js';
 import SelectSeats from './SelectSeats.js';
+import SuccessScreen from './SuccessScreen.js';
 
 export default function App () {
     return (
@@ -9,7 +10,8 @@ export default function App () {
             <Header />
             {/*<MoviesList movies={movies} />*/}
             {/*<SessionsList movie={movies[0]} />*/}
-            <SelectSeats movie={movies[0]} />
+            {/*<SelectSeats movie={movies[0]} />*/}
+            <SuccessScreen />
         </>
     );
 }
