@@ -1,9 +1,10 @@
 import Footer from './Footer.js';
+import SuccessScreen from './SuccessScreen.js';
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 
-export default function SelectSeats () {
+export default function SelectSeats ({ cart }) {
     const { sessionId } = useParams();
     const [ seats, setSeats ] = useState([]);
 
@@ -18,11 +19,11 @@ export default function SelectSeats () {
         <section className="select-seats">
             <h1>Selecione o(s) assento(s)</h1>
             <div className="seats-list">
-                {seats.map((seat, index) => <Seat key={index} seat={seat} />)}
+                {seats.map((seat, index) => <Seat key={index} seat={seat} cart={cart} />)}
             </div>
             <SeatClasses />
             <BuyerData />
-            <Link to="/sessions/seats/success">
+            <Link to="/success">
                 <button>Reservar assento(s)</button>
             </Link>
             {/*<Footer movie={movie} movieInfo={movieInfo} />*/}
@@ -30,14 +31,17 @@ export default function SelectSeats () {
     );
 }
 
-function Seat ({ seat }) {
-    const { name, isAvailable } = seat;
+function Seat ({ seat, cart }) {
+    const { id, name, isAvailable } = seat;
     const [ seatStatus, setSeatStatus ] = useState(isAvailable ? "avaible":"unavaible");
 
-    function changeSeatStatus () {
+    function selectSeat() {
         if (seatStatus === "avaible") {
+            cart.ids.push(id);
             setSeatStatus("selected");
         } else if (seatStatus === "selected") {
+            const newCart = cart.ids.filter((thisId) => thisId !== id);
+            cart.ids = [...newCart];
             setSeatStatus("avaible");
         } else {
             alert("Assento indisponível!");
@@ -45,7 +49,7 @@ function Seat ({ seat }) {
     }
 
     return (
-        <div className={`seat ${seatStatus}`} onClick={changeSeatStatus}>
+        <div className={`seat ${seatStatus}`} onClick={selectSeat}>
             <span>{name < 10 ? `0${name}`:name}</span>
         </div>
     );

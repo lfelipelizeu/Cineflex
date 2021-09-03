@@ -4,8 +4,13 @@ import SessionsList from './SessionsList.js';
 import SelectSeats from './SelectSeats.js';
 import SuccessScreen from './SuccessScreen.js';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { useState } from 'react';
 
 export default function App () {
+    const cart = {
+        ids: []
+    };
+
     return (
         <BrowserRouter>
             <Header />
@@ -17,11 +22,10 @@ export default function App () {
                     <SessionsList />
                 </Route>
                 <Route path="/seats/:sessionId" exact>
-                    <SelectSeats />
-                </Route>
-                {/*<Route path="/sessions/seats/success" exact>
+                    <SelectSeats cart={cart} />
+                </Route><Route path="/success" exact>
                     <SuccessScreen />
-                </Route>*/}
+                </Route>
             </Switch>
         </BrowserRouter>
     );
