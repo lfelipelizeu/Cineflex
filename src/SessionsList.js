@@ -1,47 +1,45 @@
 import Footer from './Footer.js';
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import axios from 'axios';
 
-export default function SessionsList ({ movie }) {
-    const [ movieInfo, setMovieInfo ] = useState([movie.title]);
+export default function SessionsList () {
+    const { movieId } = useParams();
+    const [ movie, setMovie ] = useState({});
+    const [ days, setDays ] = useState([]);
+
+    useEffect(() => {
+        axios.get(`https://mock-api.bootcamp.respondeai.com.br/api/v3/cineflex/movies/${movieId}/showtimes`)
+            .then((response) => {
+                setMovie(response.data);
+                setDays(response.data.days);
+            });
+    }, {});
 
     return (
         <section className="sessions-list">
             <h1>Selecione o horário</h1>
             {days.map((day, index) => <Day key={index} day={day} />)}
-            <Footer movie={movie} movieInfo={movieInfo} />
+            {/*<Footer movie={movie} movieInfo={movieInfo} />*/}
         </section>
     );
 }
 
 function Day ({ day }) {
-    const { weekday, date, sessions } = day;
+    const { date, showtimes, weekday } = day;
     
     return (
         <div className="day">
             <h2>{weekday} - {date}</h2>
             <div className="sessions">
-                {sessions.map((session,index) => {
+                {showtimes.map((showtime,index) => {
                    return (
-                        <Link to="/sessions/seats">
-                            <button key={index}>{session}</button>
+                        <Link to={`/seats/${showtime.id}`}>
+                            <button key={index}>{showtime.name}</button>
                         </Link>
-                    )
+                    );
                 })}
             </div>
         </div>
     );
 }
-
-const days = [
-    { 
-        date: "24/06/2021",
-        weekday: "Quinta-feira",
-        sessions: ["15:00", "19:00"]
-    },
-    { 
-        date: "25/06/2021",
-        weekday: "Sexta-feira",
-        sessions: ["15:00", "19:00"]
-    }
-];

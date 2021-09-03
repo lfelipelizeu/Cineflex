@@ -17,7 +17,7 @@ export default function MoviesList () {
             <div className="movies-list">
                 {movies.map((movie,index) => {
                     return (
-                        <Link to="/sessions">
+                        <Link to={`/sessions/${movie.id}`}>
                             <Movie key={index} title={movie.title} img={movie.posterURL} />
                         </Link>
                     );
