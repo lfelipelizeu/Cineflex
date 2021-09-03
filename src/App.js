@@ -16,10 +16,10 @@ export default function App () {
                 <Route path="/sessions/:movieId" exact>
                     <SessionsList />
                 </Route>
-                {/*<Route path="/sessions/seats" exact>
+                <Route path="/seats/:sessionId" exact>
                     <SelectSeats />
-                </*Route>
-                {<Route path="/sessions/seats/success" exact>
+                </Route>
+                {/*<Route path="/sessions/seats/success" exact>
                     <SuccessScreen />
                 </Route>*/}
             </Switch>

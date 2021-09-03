@@ -14,7 +14,7 @@ export default function SessionsList () {
                 setMovie(response.data);
                 setDays(response.data.days);
             });
-    }, {});
+    }, []);
 
     return (
         <section className="sessions-list">
