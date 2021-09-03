@@ -8,7 +8,9 @@ import { useState } from 'react';
 
 export default function App () {
     const cart = {
-        ids: []
+        ids: [],
+        name: "",
+        cpf: ""
     };
 
     return (

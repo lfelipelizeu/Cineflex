@@ -7,6 +7,8 @@ import axios from 'axios';
 export default function SelectSeats ({ cart }) {
     const { sessionId } = useParams();
     const [ seats, setSeats ] = useState([]);
+    const [ buyerName, setBuyerName ] = useState("");
+    const [ buyerCpf, setBuyerCpf ] = useState("");
 
     useEffect(() => {
         axios.get(`https://mock-api.bootcamp.respondeai.com.br/api/v3/cineflex/showtimes/${sessionId}/seats`)
@@ -15,6 +17,12 @@ export default function SelectSeats ({ cart }) {
             });
     }, []);
 
+    function sendPurchaseToServer () {
+        cart.name = buyerName;
+        cart.cpf = buyerCpf;
+        console.log(cart);
+    }
+
     return (
         <section className="select-seats">
             <h1>Selecione o(s) assento(s)</h1>
@@ -22,9 +30,9 @@ export default function SelectSeats ({ cart }) {
                 {seats.map((seat, index) => <Seat key={index} seat={seat} cart={cart} />)}
             </div>
             <SeatClasses />
-            <BuyerData />
+            <BuyerData buyerName={buyerName} buyerCpf={buyerCpf} setBuyerName={setBuyerName} setBuyerCpf={setBuyerCpf} />
             <Link to="/success">
-                <button>Reservar assento(s)</button>
+                <button onClick={sendPurchaseToServer}>Reservar assento(s)</button>
             </Link>
             {/*<Footer movie={movie} movieInfo={movieInfo} />*/}
         </section>
@@ -74,14 +82,14 @@ function SeatClasses () {
     );
 }
 
-function BuyerData () {
+function BuyerData ({ buyerName, buyerCpf, setBuyerName, setBuyerCpf }) {
     return (
         <div className="buyer-data">
             Nome do comprador:
-            <input type="text" placeholder="Digite seu nome..." />
+            <input type="text" placeholder="Digite seu nome..." value={buyerName} onChange={(e) => setBuyerName(e.target.value)} />
 
             CPF do comprador:
-            <input type="text" placeholder="Digite seu CPF..." />
+            <input type="text" placeholder="Digite seu CPF..." value={buyerCpf} onChange={(e) => setBuyerCpf(e.target.value)} />
         </div>
     );
 }
