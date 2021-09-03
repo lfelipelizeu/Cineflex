@@ -123,12 +123,12 @@ section.select-seats div.seats-list div.seat {
     border: 1px solid;
 }
 
-section.select-seats div.seats-list div.seat.avaible {
+section.select-seats div.seats-list div.seat.available {
     background-color: #c3cfd9;
     border-color: #7b8b99;
 }
 
-section.select-seats div.seats-list div.seat.unavaible {
+section.select-seats div.seats-list div.seat.unavailable {
     background-color: #fbe192;
     border-color: #f7c52b;
 }
@@ -171,12 +171,12 @@ section.select-seats div.seat-classes div.seat-class div.seat {
     margin-bottom: 5px;
 }
 
-section.select-seats div.seat-classes div.seat-class div.seat.avaible {
+section.select-seats div.seat-classes div.seat-class div.seat.available {
     background-color: #c3cfd9;
     border-color: #7b8b99;
 }
 
-section.select-seats div.seat-classes div.seat-class div.seat.unavaible {
+section.select-seats div.seat-classes div.seat-class div.seat.unavailable {
     background-color: #fbe192;
     border-color: #f7c52b;
 }

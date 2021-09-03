@@ -33,16 +33,16 @@ export default function SelectSeats ({ cart }) {
 
 function Seat ({ seat, cart }) {
     const { id, name, isAvailable } = seat;
-    const [ seatStatus, setSeatStatus ] = useState(isAvailable ? "avaible":"unavaible");
+    const [ seatStatus, setSeatStatus ] = useState(isAvailable ? "available":"unavailable");
 
     function selectSeat() {
-        if (seatStatus === "avaible") {
+        if (seatStatus === "available") {
             cart.ids.push(id);
             setSeatStatus("selected");
         } else if (seatStatus === "selected") {
             const newCart = cart.ids.filter((thisId) => thisId !== id);
             cart.ids = [...newCart];
-            setSeatStatus("avaible");
+            setSeatStatus("available");
         } else {
             alert("Assento indisponível!");
         }
@@ -63,11 +63,11 @@ function SeatClasses () {
                 Selecionado
             </div>
             <div className="seat-class">
-                <div className="seat avaible"></div>
+                <div className="seat available"></div>
                 Disponível
             </div>
             <div className="seat-class">
-                <div className="seat unavaible"></div>
+                <div className="seat unavailable"></div>
                 Indisponível
             </div>
         </div>
