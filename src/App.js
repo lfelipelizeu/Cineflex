@@ -7,11 +7,11 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { useState } from 'react';
 
 export default function App () {
-    const cart = {
+    const [ ticket, setTicket ] = useState({
         ids: [],
         name: "",
-        cpf: ""
-    };
+        cpf: "",
+    });
 
     return (
         <BrowserRouter>
@@ -24,9 +24,10 @@ export default function App () {
                     <SessionsList />
                 </Route>
                 <Route path="/seats/:sessionId" exact>
-                    <SelectSeats cart={cart} />
-                </Route><Route path="/success" exact>
-                    <SuccessScreen />
+                    <SelectSeats ticket={ticket} setTicket={setTicket} />
+                </Route>
+                <Route path="/success" exact>
+                    <SuccessScreen ticket={ticket} />
                 </Route>
             </Switch>
         </BrowserRouter>

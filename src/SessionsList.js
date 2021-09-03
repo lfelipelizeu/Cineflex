@@ -34,8 +34,8 @@ function Day ({ day }) {
             <div className="sessions">
                 {showtimes.map((showtime,index) => {
                    return (
-                        <Link to={`/seats/${showtime.id}`}>
-                            <button key={index}>{showtime.name}</button>
+                        <Link key={index} to={`/seats/${showtime.id}`}>
+                            <button>{showtime.name}</button>
                         </Link>
                     );
                 })}
