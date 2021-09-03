@@ -4,8 +4,10 @@ import React, { useState, useEffect } from "react";
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 
-export default function SelectSeats ({ ticket, setTicket }) {
+export default function SelectSeats ({ cart, setTicket }) {
     const { sessionId } = useParams();
+    cart.session = sessionId;
+    const ticket = cart.ticket;
     const [ seats, setSeats ] = useState([]);
     const [ buyerName, setBuyerName ] = useState("");
     const [ buyerCpf, setBuyerCpf ] = useState("");
@@ -14,7 +16,6 @@ export default function SelectSeats ({ ticket, setTicket }) {
         axios.get(`https://mock-api.bootcamp.respondeai.com.br/api/v3/cineflex/showtimes/${sessionId}/seats`)
             .then((response) => {
                 setSeats(response.data.seats);
-                console.log(ticket);
             });
     }, []);
 

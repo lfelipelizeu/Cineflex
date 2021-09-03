@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 
-export default function SuccessScreen () {
+export default function SuccessScreen ({ cart }) {
+    console.log(cart);
+    
     return (
         <section className="success-screen">
             <h1>Pedido feito com sucesso!</h1>

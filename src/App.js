@@ -13,6 +13,11 @@ export default function App () {
         cpf: "",
     });
 
+    const cart = {
+        session: 0,
+        ticket: ticket
+    }
+
     return (
         <BrowserRouter>
             <Header />
@@ -24,10 +29,10 @@ export default function App () {
                     <SessionsList />
                 </Route>
                 <Route path="/seats/:sessionId" exact>
-                    <SelectSeats ticket={ticket} setTicket={setTicket} />
+                    <SelectSeats cart={cart} setTicket={setTicket} />
                 </Route>
                 <Route path="/success" exact>
-                    <SuccessScreen ticket={ticket} />
+                    <SuccessScreen cart={cart} />
                 </Route>
             </Switch>
         </BrowserRouter>
