@@ -4,10 +4,8 @@ import React, { useState, useEffect } from "react";
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 
-export default function SelectSeats ({ cart, setTicket }) {
+export default function SelectSeats ({ cart, setCart, ticket, setTicket }) {
     const { sessionId } = useParams();
-    cart.session = sessionId;
-    const ticket = cart.ticket;
     const [ seats, setSeats ] = useState([]);
     const [ buyerName, setBuyerName ] = useState("");
     const [ buyerCpf, setBuyerCpf ] = useState("");
@@ -16,6 +14,11 @@ export default function SelectSeats ({ cart, setTicket }) {
         axios.get(`https://mock-api.bootcamp.respondeai.com.br/api/v3/cineflex/showtimes/${sessionId}/seats`)
             .then((response) => {
                 setSeats(response.data.seats);
+                const newCart = {...cart};
+                newCart.title = response.data.movie.title;
+                newCart.date = response.data.day.date;
+                newCart.time = response.data.name;
+                setCart(newCart);
             });
     }, []);
 
@@ -23,10 +26,15 @@ export default function SelectSeats ({ cart, setTicket }) {
         <section className="select-seats">
             <h1>Selecione o(s) assento(s)</h1>
             <div className="seats-list">
-                {seats.map((seat, index) => <Seat key={index} seat={seat} ticket={ticket} setTicket={setTicket} />)}
+                {seats.map((seat, index) => <Seat key={index} seat={seat} cart={cart} setCart={setCart} ticket={ticket} setTicket={setTicket} />)}
             </div>
             <SeatClasses />
-            <BuyerData buyerName={buyerName} buyerCpf={buyerCpf} setBuyerName={setBuyerName} setBuyerCpf={setBuyerCpf} />
+            <BuyerData
+                buyerName={buyerName}
+                buyerCpf={buyerCpf}
+                setBuyerName={setBuyerName}
+                setBuyerCpf={setBuyerCpf}
+            />
             <Link to={isDataFilled(ticket, buyerName, buyerCpf) ? '/success':`/seats/${sessionId}`}>
                 <button onClick={() => isDataFilled(ticket, buyerName, buyerCpf) ? sendPurchaseToServer(ticket, buyerName, buyerCpf):alert('Preencha todos os dados!')}>Reservar assento(s)</button>
             </Link>
@@ -35,31 +43,35 @@ export default function SelectSeats ({ cart, setTicket }) {
     );
 }
 
-function Seat ({ seat, ticket, setTicket }) {
+function Seat ({ seat, cart, setCart, ticket, setTicket }) {
     const { id, name, isAvailable } = seat;
     const [ seatStatus, setSeatStatus ] = useState(isAvailable ? "available":"unavailable");
 
     return (
-        <div className={`seat ${seatStatus}`} onClick={() => selectSeat(ticket, setTicket, id, seatStatus, setSeatStatus)}>
+        <div className={`seat ${seatStatus}`} onClick={() => selectSeat(cart, setCart, ticket, setTicket, id, name, seatStatus, setSeatStatus)}>
             <span>{name < 10 ? `0${name}`:name}</span>
         </div>
     );
 }
 
-function selectSeat(ticket, setTicket, id, seatStatus, setSeatStatus) {
+function selectSeat(cart, setCart, ticket, setTicket, id, number, seatStatus, setSeatStatus) {
     const newTicket = {...ticket};
+    const newCart = {...cart};
 
     if (seatStatus === "available") {
         newTicket.ids.push(id);
-        setTicket(newTicket);
+        newCart.buyingSeats.push(number);
         setSeatStatus("selected");
     } else if (seatStatus === "selected") {
+        newCart.buyingSeats = cart.buyingSeats.filter((buyingSeat) => buyingSeat !== number);
         newTicket.ids = ticket.ids.filter((thisId) => thisId !== id);
-        setTicket(newTicket);
         setSeatStatus("available");
     } else {
         alert("Assento indisponível!");
     }
+
+    setCart(newCart);
+    setTicket(newTicket);
 }
 
 function SeatClasses () {

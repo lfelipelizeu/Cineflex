@@ -13,10 +13,12 @@ export default function App () {
         cpf: "",
     });
 
-    const cart = {
-        session: 0,
-        ticket: ticket
-    }
+    const [ cart, setCart ] = useState({
+        title: "",
+        date: "",
+        time: "",
+        buyingSeats: []
+    });
 
     return (
         <BrowserRouter>
@@ -29,10 +31,15 @@ export default function App () {
                     <SessionsList />
                 </Route>
                 <Route path="/seats/:sessionId" exact>
-                    <SelectSeats cart={cart} setTicket={setTicket} />
+                    <SelectSeats
+                        cart={cart}
+                        setCart={setCart}
+                        ticket={ticket}
+                        setTicket={setTicket}
+                    />
                 </Route>
                 <Route path="/success" exact>
-                    <SuccessScreen cart={cart} />
+                    <SuccessScreen cart={cart} ticket={ticket} />
                 </Route>
             </Switch>
         </BrowserRouter>
