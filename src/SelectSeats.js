@@ -9,6 +9,10 @@ export default function SelectSeats ({ cart, setCart, ticket, setTicket }) {
     const [ seats, setSeats ] = useState([]);
     const [ buyerName, setBuyerName ] = useState("");
     const [ buyerCpf, setBuyerCpf ] = useState("");
+    const [ movie, setMovie ] = useState({
+        info: [],
+        img: "",
+    });
 
     useEffect(() => {
         axios.get(`https://mock-api.bootcamp.respondeai.com.br/api/v3/cineflex/showtimes/${sessionId}/seats`)
@@ -19,6 +23,11 @@ export default function SelectSeats ({ cart, setCart, ticket, setTicket }) {
                 newCart.date = response.data.day.date;
                 newCart.time = response.data.name;
                 setCart(newCart);
+                const newMovie = {...movie};
+                newMovie.info.push(newCart.title);
+                newMovie.info.push(`${response.data.day.weekday} - ${newCart.time}`);
+                newMovie.img = response.data.movie.posterURL;
+                setMovie(newMovie);
             });
     }, []);
 
@@ -38,7 +47,7 @@ export default function SelectSeats ({ cart, setCart, ticket, setTicket }) {
             <Link to={isDataFilled(ticket, buyerName, buyerCpf) ? '/success':`/seats/${sessionId}`}>
                 <button onClick={() => isDataFilled(ticket, buyerName, buyerCpf) ? sendPurchaseToServer(ticket, buyerName, buyerCpf):alert('Preencha todos os dados!')}>Reservar assento(s)</button>
             </Link>
-            {/*<Footer movie={movie} movieInfo={movieInfo} />*/}
+            <Footer movieInfo={movie} />
         </section>
     );
 }

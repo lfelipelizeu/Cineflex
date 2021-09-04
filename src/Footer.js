@@ -1,12 +1,12 @@
 import Movie from './Movie.js';
 
-export default function ({ movie, movieInfo }) {
-    const { title, img } = movie;
+export default function ({ movieInfo }) {
+    const { info, img } = movieInfo;
     return (
         <footer>
-            <Movie title={title} img={img} />
+            <Movie title={info[0]} img={img} />
             <div className="movie-info">
-                <Info movieInfo={movieInfo} />
+                <Info movieInfo={info} />
             </div>
         </footer>
     );

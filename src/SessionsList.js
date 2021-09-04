@@ -5,14 +5,20 @@ import axios from 'axios';
 
 export default function SessionsList () {
     const { movieId } = useParams();
-    const [ movie, setMovie ] = useState({});
+    const [ movie, setMovie ] = useState({
+        info: [],
+        img: "",
+    });
     const [ days, setDays ] = useState([]);
 
     useEffect(() => {
         axios.get(`https://mock-api.bootcamp.respondeai.com.br/api/v3/cineflex/movies/${movieId}/showtimes`)
             .then((response) => {
-                setMovie(response.data);
                 setDays(response.data.days);
+                const newMovie = {...movie};
+                newMovie.info.push(response.data.title);
+                newMovie.img = response.data.posterURL;
+                setMovie(newMovie);
             });
     }, []);
 
@@ -20,7 +26,7 @@ export default function SessionsList () {
         <section className="sessions-list">
             <h1>Selecione o horário</h1>
             {days.map((day, index) => <Day key={index} day={day} />)}
-            {/*<Footer movie={movie} movieInfo={movieInfo} />*/}
+            <Footer movieInfo={movie} />
         </section>
     );
 }
