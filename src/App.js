@@ -20,6 +20,20 @@ export default function App () {
         buyingSeats: []
     });
 
+    function resetPurchase () {
+        setTicket({
+            ids: [],
+            name: "",
+            cpf: "",
+        });
+        setCart({
+            title: "",
+            date: "",
+            time: "",
+            buyingSeats: []
+        });
+    }
+
     return (
         <BrowserRouter>
             <Header />
@@ -39,7 +53,7 @@ export default function App () {
                     />
                 </Route>
                 <Route path="/success" exact>
-                    <SuccessScreen cart={cart} ticket={ticket} />
+                    <SuccessScreen cart={cart} ticket={ticket} resetPurchase={resetPurchase} />
                 </Route>
             </Switch>
         </BrowserRouter>

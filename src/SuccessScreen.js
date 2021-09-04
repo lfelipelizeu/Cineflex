@@ -1,47 +1,48 @@
 import { Link } from 'react-router-dom';
 
-export default function SuccessScreen ({ cart }) {
+export default function SuccessScreen ({ cart, ticket, resetPurchase }) {
+    const { title, date, time, buyingSeats } = cart;
+    const { name, cpf } = ticket;
     console.log(cart);
     
     return (
         <section className="success-screen">
             <h1>Pedido feito com sucesso!</h1>
-            <MovieInfo />
-            <SeatsInfo />
-            <BuyerInfo />
+            <MovieInfo title={title} date={date} time={time} />
+            <SeatsInfo seats={buyingSeats} />
+            <BuyerInfo name={name} cpf={cpf} />
             <Link to="/">
-                <button>Voltar pra Home</button>
+                <button onClick={resetPurchase}>Voltar pra Home</button>
             </Link>
         </section>
     );
 }
 
-function MovieInfo ({ }) {
+function MovieInfo ({ title, date, time }) {
     return (
         <div className="info">
             <h1>Filme e sessão</h1>
-            <p>2067</p>
-            <p>24/06/2021 15:00</p>
+            <p>{title}</p>
+            <p>{date} {time}</p>
         </div>
     );
 }
 
-function SeatsInfo ({ }) {
+function SeatsInfo ({ seats }) {
     return (
         <div className="info">
             <h1>Ingressos</h1>
-            <p>Assento 15</p>
-            <p>Assento 16</p>
+            {seats.map((seat, index) => <p>Assento {seat}</p>)}
         </div>
     );
 }
 
-function BuyerInfo ({ }) {
+function BuyerInfo ({ name, cpf }) {
     return (
         <div className="info">
             <h1>Comprador</h1>
-            <p>Nome: João da Silva Sauro</p>
-            <p>CPF: 123.456.789-10</p>
+            <p>Nome: {name}</p>
+            <p>CPF: {cpf}</p>
         </div>
     );
 }
