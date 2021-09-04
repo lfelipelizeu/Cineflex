@@ -117,7 +117,9 @@ function BuyerData ({ buyerName, buyerCpf, setBuyerName, setBuyerCpf }) {
 function sendPurchaseToServer (ticket, buyerName, buyerCpf) {
     ticket.name = buyerName;
     ticket.cpf = buyerCpf;
-    console.log(ticket);
+
+    axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v3/cineflex/seats/book-many", ticket)
+        .catch("Ocorreu algum erro!");
 }
 
 function isDataFilled (ticket, buyerName, buyerCpf) {
