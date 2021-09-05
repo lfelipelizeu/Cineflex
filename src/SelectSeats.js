@@ -1,5 +1,4 @@
 import Footer from './Footer.js';
-import SuccessScreen from './SuccessScreen.js';
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';

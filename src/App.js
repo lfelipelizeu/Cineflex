@@ -7,6 +7,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { useState } from 'react';
 
 export default function App () {
+    const [ showButton, setShowButton ] = useState(false);
     const [ ticket, setTicket ] = useState({
         ids: [],
         name: "",
@@ -32,17 +33,18 @@ export default function App () {
             time: "",
             buyingSeats: []
         });
+        setShowButton(false);
     }
 
     return (
         <BrowserRouter>
-            <Header />
+            <Header showButton={showButton} />
             <Switch>
                 <Route path="/" exact>
                     <MoviesList />
                 </Route>
                 <Route path="/sessions/:movieId" exact>
-                    <SessionsList />
+                    <SessionsList setShowButton={setShowButton} />
                 </Route>
                 <Route path="/seats/:sessionId" exact>
                     <SelectSeats

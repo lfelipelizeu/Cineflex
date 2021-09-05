@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 
-export default function SessionsList () {
+export default function SessionsList ({ setShowButton }) {
     const { movieId } = useParams();
     const [ movie, setMovie ] = useState({
         info: [],
@@ -19,6 +19,7 @@ export default function SessionsList () {
                 newMovie.info.push(response.data.title);
                 newMovie.img = response.data.posterURL;
                 setMovie(newMovie);
+                setShowButton(true);
             });
     }, []);
 

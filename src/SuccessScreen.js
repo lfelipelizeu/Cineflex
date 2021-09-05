@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 export default function SuccessScreen ({ cart, ticket, resetPurchase }) {
     const { title, date, time, buyingSeats } = cart;
     const { name, cpf } = ticket;
-    console.log(cart);
     
     return (
         <section className="success-screen">
@@ -32,7 +31,7 @@ function SeatsInfo ({ seats }) {
     return (
         <div className="info">
             <h1>Ingressos</h1>
-            {seats.map((seat, index) => <p>Assento {seat}</p>)}
+            {seats.map((seat, index) => <p key={index}>Assento {seat}</p>)}
         </div>
     );
 }
