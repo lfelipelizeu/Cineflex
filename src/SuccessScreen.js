@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom';
 
-export default function SuccessScreen ({ cart, ticket, resetPurchase }) {
+export default function SuccessScreen ({ cart, ticket, resetPurchase, setShowButton }) {
     const { title, date, time, buyingSeats } = cart;
     const { name, cpf } = ticket;
+    setShowButton(false);
     
     return (
         <section className="success-screen">

@@ -8,37 +8,20 @@ import { useState } from 'react';
 
 export default function App () {
     const [ showButton, setShowButton ] = useState(false);
-    const [ ticket, setTicket ] = useState({
-        ids: [],
-        name: "",
-        cpf: "",
-    });
-
-    const [ cart, setCart ] = useState({
-        title: "",
-        date: "",
-        time: "",
-        buyingSeats: []
-    });
+    const [ ticket, setTicket ] = useState({});
+    const [ cart, setCart ] = useState({});
 
     function resetPurchase () {
-        setTicket({
-            ids: [],
-            name: "",
-            cpf: "",
-        });
-        setCart({
-            title: "",
-            date: "",
-            time: "",
-            buyingSeats: []
-        });
-        setShowButton(false);
+        setTicket({});
+        setCart({});
     }
 
     return (
         <BrowserRouter>
-            <Header showButton={showButton} />
+            <Header
+                showButton={showButton}
+                setShowButton={setShowButton}
+            />
             <Switch>
                 <Route path="/" exact>
                     <MoviesList />
@@ -55,7 +38,11 @@ export default function App () {
                     />
                 </Route>
                 <Route path="/success" exact>
-                    <SuccessScreen cart={cart} ticket={ticket} resetPurchase={resetPurchase} />
+                    <SuccessScreen
+                        cart={cart} ticket={ticket}
+                        resetPurchase={resetPurchase}
+                        setShowButton={setShowButton}
+                    />
                 </Route>
             </Switch>
         </BrowserRouter>

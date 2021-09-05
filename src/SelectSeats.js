@@ -17,14 +17,20 @@ export default function SelectSeats ({ cart, setCart, ticket, setTicket }) {
         axios.get(`https://mock-api.bootcamp.respondeai.com.br/api/v3/cineflex/showtimes/${sessionId}/seats`)
             .then((response) => {
                 setSeats(response.data.seats);
-                const newCart = {...cart};
-                newCart.title = response.data.movie.title;
-                newCart.date = response.data.day.date;
-                newCart.time = response.data.name;
-                setCart(newCart);
+                setTicket({
+                    ids: [],
+                    name: "",
+                    cpf: "",
+                });
+                setCart({
+                    title: response.data.movie.title,
+                    date: response.data.day.date,
+                    time: response.data.name,
+                    buyingSeats: []
+                });
                 const newMovie = {...movie};
-                newMovie.info.push(newCart.title);
-                newMovie.info.push(`${response.data.day.weekday} - ${newCart.time}`);
+                newMovie.info.push(response.data.movie.title);
+                newMovie.info.push(`${response.data.day.weekday} - ${response.data.name}`);
                 newMovie.img = response.data.movie.posterURL;
                 setMovie(newMovie);
             });
